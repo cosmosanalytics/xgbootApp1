@@ -22,7 +22,7 @@ from sklearn.model_selection import GridSearchCV
 
 
 # Read data from csv.
-data = pd.read_csv('co2.csv').rename(columns={'YYYYMM':'Date','value':'target'})
+data = pd.read_csv('co2.csv').rename(columns={'YYYYMM':'Date','Value':'target'})
 st.write(data)
 
 
