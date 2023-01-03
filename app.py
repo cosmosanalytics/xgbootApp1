@@ -22,7 +22,7 @@ from sklearn.model_selection import GridSearchCV
 
 
 # Read data from csv.
-data = pd.read_csv('co2.csv').rename(columns={'YYYYMM':'Date'})
+data = pd.read_csv('co2.csv').rename(columns={'YYYYMM':'Date','value':'Target'})
 st.write(data)
 
 
@@ -39,11 +39,11 @@ data['month'] = data['Date'].dt.month
 data['week_of_year'] = data['Date'].dt.week
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
 
-# Encode col1, col2, col3 variables.
-le = preprocessing.LabelEncoder()
-data['col1'] = le.fit_transform(data['col1'])
-data['col2'] = le.fit_transform(data['col2'])
-data['col3'] = le.fit_transform(data['col3'])
+# # Encode col1, col2, col3 variables.
+# le = preprocessing.LabelEncoder()
+# data['col1'] = le.fit_transform(data['col1'])
+# data['col2'] = le.fit_transform(data['col2'])
+# data['col3'] = le.fit_transform(data['col3'])
 
 def report_metric(pred, test, model_name):
     mae = mean_absolute_error(pred, test)
@@ -74,10 +74,12 @@ train = data[:test_period]
 
 ### Perpare for Model 1
 
-x_trainm1 = train[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_trainm1 = train[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+# x_trainm1 = train[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_trainm1 = train[["target"]]
 
-x_testm1 = test[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_testm1 = test[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+# x_testm1 = test[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_testm1 = test[["target"]]
 
 lr = LinearRegression()
@@ -90,10 +92,12 @@ metric1 = report_metric(m1pred, y_testm1, "Linear Regression")
 
 ### Prepare for model 2
 
-x_trainm2 = train[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_trainm2 = train[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+# x_trainm2 = train[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_trainm2 = train[["target"]]
 
-x_testm2 = test[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_testm2 = test[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+# x_testm2 = test[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_testm2 = test[["target"]]
 
 xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
@@ -112,10 +116,12 @@ metric2 = report_metric(m2pred, y_testm2, "XGB Regression")
 
 
 # We will use important columns.
-x_trainm3 = train[["col1", "col3", "day_of_week", "day_of_month"]]
+x_trainm3 = train[["day_of_week", "day_of_month"]]
+# x_trainm3 = train[["col1", "col3", "day_of_week", "day_of_month"]]
 y_trainm3 = train[["target"]]
 
-x_testm3 = test[["col1", "col3", "day_of_week", "day_of_month"]]
+x_testm3 = test[["day_of_week", "day_of_month"]]
+# x_testm3 = test[["col1", "col3", "day_of_week", "day_of_month"]]
 y_testm3 = test[["target"]]
 
 # fit scaler on training data
