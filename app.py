@@ -31,7 +31,7 @@ with dataset:
     st.header("CO2 Emissions USA-Dataset")
     st.text("I found this Dataset on Kaggle.com\n")
     st.subheader("Dataset-Head:")
-    data = pd.read_csv("../input/co2-dataset-in-usa/co2.csv")
+    data = pd.read_csv("co2.csv")
     st.write(data.head())
 
     st.subheader("Dataset Description:")
