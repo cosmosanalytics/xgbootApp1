@@ -22,7 +22,8 @@ from sklearn.model_selection import GridSearchCV
 
 
 # Read data from csv.
-data = pd.read_csv('co2.csv')
+data = pd.read_csv('co2.csv').rename(columns={'YYYYMM':'Date'})
+st.write(data)
 
 
 # Change data type of date column. ( object to datetime)
