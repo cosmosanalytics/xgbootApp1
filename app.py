@@ -22,7 +22,7 @@ from sklearn.model_selection import GridSearchCV
 
 
 # Read data from csv.
-data = pd.read_csv('/Users/skaraderili/PycharmProjects/anomaly_w_streamlit/streamlit_data.csv', sep=',')
+data = pd.read_csv('co2.csv')
 
 
 # Change data type of date column. ( object to datetime)
