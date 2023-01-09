@@ -67,7 +67,7 @@ def plot_preds(data_date,test_date, target, pred):
 
 # Train test split
 
-test_period = -20 
+test_period = -3 
 
 test = data[test_period:]
 train = data[:test_period]
