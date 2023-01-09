@@ -27,7 +27,7 @@ st.write(data)
 
 
 # Change data type of date column. ( object to datetime)
-data['Date'] = pd.to_datetime(data["Date"], format='%Y%M')
+data['Date'] = pd.to_datetime(data["Date"])
 # Sort data by date column.
 data.sort_values(by=['Date'], inplace=True)
 
