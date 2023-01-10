@@ -9,9 +9,6 @@ from sklearn.linear_model import LinearRegression
 from xgboost import XGBRegressor
 from xgboost import plot_importance
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler
-import lightgbm as lgb
-from lightgbm import LGBMRegressor
 
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
@@ -21,11 +18,7 @@ from sklearn.model_selection import GridSearchCV
 data = pd.read_csv('NAMtotal_s.csv').rename(columns={'ds':'Date','y':'target'})
 data['Date'] = pd.to_datetime(data["Date"])
 data.sort_values(by=['Date'], inplace=True)
-
-# data['day_of_week'] = data['Date'].dt.dayofweek
-# data['day_of_month'] = data['Date'].dt.day
 data['month'] = data['Date'].dt.month
-# data['week_of_year'] = data['Date'].dt.week
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
 
 def report_metric(pred, test, model_name):
@@ -63,10 +56,7 @@ xgb.fit(x_train, y_train)
 pred_xgb = xgb.predict(x_train.append(x_test))
 metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
 #########################
-lgb = LGBMRegressor(learning_rate=0.1, max_depth=2, min_child_samples=25, n_estimators=100, num_leaves=31)
-lgb.fit(x_train, y_train)
-pred_lgb = lgb.predict(x_train.append(x_test))
-metric_lgb = report_metric(pred_lgb, y_train.append(y_test), "LGBM Regression")
+
 #########################
 st.title("Hello, welcome to volume predictor!")
 st.write("""  
@@ -85,7 +75,5 @@ st.write("Model 2 works with XGB Regressor.")
 st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
-st.write("Model 3 works with LighGBM Regressor.")
-st.write(metric_lgb)
-plot_preds(data["Date"],data["Date"], data["target"], pred_lgb)
+
 
