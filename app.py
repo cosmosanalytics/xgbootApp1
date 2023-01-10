@@ -23,10 +23,10 @@ data = pd.read_csv('NAMtotal_s.csv').rename(columns={'index':'Date','y':'target'
 data['Date'] = pd.to_datetime(data["Date"])
 data.sort_values(by=['Date'], inplace=True)
 
-data['day_of_week'] = data['Date'].dt.dayofweek
-data['day_of_month'] = data['Date'].dt.day
+# data['day_of_week'] = data['Date'].dt.dayofweek
+# data['day_of_month'] = data['Date'].dt.day
 data['month'] = data['Date'].dt.month
-data['week_of_year'] = data['Date'].dt.week
+# data['week_of_year'] = data['Date'].dt.week
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
 
 # # Encode col1, col2, col3 variables.
@@ -59,11 +59,11 @@ test = data[test_period:]
 train = data[:test_period]
 
 ### Perpare for Model 1
-x_trainm1 = train[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_trainm1 = train[["month", "season"]]
 # x_trainm1 = train[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_trainm1 = train[["target"]]
 
-x_testm1 = test[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_testm1 = test[["month", "season"]]
 # x_testm1 = test[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_testm1 = test[["target"]]
 
