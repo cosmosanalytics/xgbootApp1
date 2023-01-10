@@ -98,11 +98,11 @@ plot_preds(df1["ds"], forecast["ds"], df1["y"], forecast["yhat"])
 
 st.write("Model 3 works with XGB Regressor.")
 #########################
-# xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
-# xgb.fit(x_train, y_train)
-# pred_xgb = xgb.predict(x_train.append(x_test))
-# # metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
-# # st.write(metric_xgb)
-# plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
+xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
+xgb.fit(x_train, y_train)
+pred_xgb = xgb.predict(x_train.append(x_test))
+# metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
+# st.write(metric_xgb)
+plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
 
