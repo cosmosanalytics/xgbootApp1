@@ -105,4 +105,16 @@ pred_xgb = xgb.predict(x_train.append(x_test))
 # st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
+st.write("Model 4 works with light GBM Regressor.")
+#########################
+norm = MinMaxScaler().fit(x_train); x_train_norm = pd.DataFrame(norm.transform(x_train)); x_test_norm = pd.DataFrame(norm.transform(x_test))
+lgb = LGBMRegressor(learning_rate=0.1,
+                                max_depth=2,
+                                min_child_samples=25,
+                                n_estimators=100,
+                                num_leaves=31)
+lgb.fit(x_train_norm, y_train)
+pred_lgb = lgb.predict(x_train_norm.append(x_test_norm))
+# metric_lgb = report_metric(pred_lgb, y_test, "LGBM Regression")
+plot_preds(data["Date"],data["Date"], data["target"], pred_lgb)
 
