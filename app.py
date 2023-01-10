@@ -41,7 +41,7 @@ def plot_preds(data_date,test_date, target, pred):
     plt.legend()
     st.pyplot(fig)
 
-test_period = -40
+test_period = -3
 test = data[test_period:]; train = data[:test_period]
 x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
 x_test = test[["GDPC1", "Inflation", "month", "season"]]; y_test = test[["target"]]
@@ -83,7 +83,7 @@ st.write("Model 2 works with XGB Regressor.")
 st.write(metric_xgb)
 plot_preds(data["Date"],test["Date"], data["target"], pred_xgb)
 
-st.write("Model 3 works with XGB Regressor.")
+st.write("Model 3 works with LighGBM Regressor.")
 st.write(metric_lgb)
 plot_preds(data["Date"],test["Date"], data["target"], pred_lgb)
 
