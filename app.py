@@ -60,7 +60,16 @@ xgb.fit(x_train_norm, y_train)
 pred_xgb = xgb.predict(x_test_norm)
 metric_xgb = report_metric(pred_xgb, y_test, "XGB Regression")
 #########################
+lgb = LGBMRegressor(learning_rate=0.1,
+                                max_depth=2,
+                                min_child_samples=25,
+                                n_estimators=100,
+                                num_leaves=31)
+lgb.fit(x_train_norm, y_train)
+pred_lgb = lgb.predict(x_test_norm)
 
+metric_lgb = report_metric(pred_lgb, y_test, "LGBM Regression")
+#########################
 st.title("Hello, welcome to volume predictor!")
 st.write("""  
 - Date: date format time feature
@@ -70,14 +79,15 @@ st.write("""
 - Volume: KG
 """)
 
-st.title("Model 1: ")
 st.write("Model 1 works with linear regression as base model.")
-st.write("The columns it used are: Real GDP, Inflation, month, season")
 st.write(metric_lr)
 plot_preds(data["Date"],test["Date"], data["target"], pred_lr)
 
-st.title("Model 2: ")
-st.write("Model 1 works with XGB Regressor.")
-st.write("The columns it used are: Real GDP, Inflation, month, season")
+st.write("Model 2 works with XGB Regressor.")
 st.write(metric_xgb)
 plot_preds(data["Date"],test["Date"], data["target"], pred_xgb)
+
+st.write("Model 3 works with XGB Regressor.")
+st.write(metric_xlgb)
+plot_preds(data["Date"],test["Date"], data["target"], pred_lgb)
+
