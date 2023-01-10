@@ -69,15 +69,15 @@ st.write("""
 - Inflation: = Nominal GDP/Real GDP - 1
 - Volume: KG
 """)
-elif page == "Linear Regressor":
-    st.title("Model 1: ")
-    st.write("Model 1 works with linear regression as base model.")
-    st.write("The columns it used are: Real GDP, Inflation, month, season")
-    st.write(metric_lr)
-    plot_preds(data["Date"],test["Date"], data["target"], pred_lr)
-else: #if page == "Linear Regressor":
-    st.title("Model 2: ")
-    st.write("Model 1 works with XGB Regressor.")
-    st.write("The columns it used are: Real GDP, Inflation, month, season")
-    st.write(metric_xgb)
-    plot_preds(data["Date"],test["Date"], data["target"], pred_xgb)
+
+st.title("Model 1: ")
+st.write("Model 1 works with linear regression as base model.")
+st.write("The columns it used are: Real GDP, Inflation, month, season")
+st.write(metric_lr)
+plot_preds(data["Date"],test["Date"], data["target"], pred_lr)
+
+st.title("Model 2: ")
+st.write("Model 1 works with XGB Regressor.")
+st.write("The columns it used are: Real GDP, Inflation, month, season")
+st.write(metric_xgb)
+plot_preds(data["Date"],test["Date"], data["target"], pred_xgb)
