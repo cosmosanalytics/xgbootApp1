@@ -44,7 +44,7 @@ def plot_preds(data_date,test_date, target, pred):
     plt.legend()
     st.pyplot(fig)
 
-test_period = -3
+test_period = -10
 test = data[test_period:]; train = data[:test_period]
 x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
 x_test = test[["GDPC1", "Inflation",  "month", "season"]]; y_test = test[["target"]]
