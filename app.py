@@ -13,7 +13,6 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
-from sklearn.model_selection import GridSearchCV
 
 data = pd.read_csv('NAMtotal_s.csv').rename(columns={'ds':'Date','y':'target'})
 data['Date'] = pd.to_datetime(data["Date"])
@@ -41,10 +40,6 @@ test_period = -10
 test = data[test_period:]; train = data[:test_period]
 x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
 x_test = test[["GDPC1", "Inflation",  "month", "season"]]; y_test = test[["target"]]
-# fit scaler on training data
-# norm = MinMaxScaler().fit(x_train)
-# x_train = pd.DataFrame(norm.transform(x_train))
-# x_test = pd.DataFrame(norm.transform(x_test))
 #########################
 lr = LinearRegression()
 lr.fit(x_train, y_train)
