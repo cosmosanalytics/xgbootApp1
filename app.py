@@ -18,6 +18,8 @@ from prophet import Prophet
 from prophet.diagnostics import cross_validation
 from prophet.diagnostics import performance_metrics
 
+import base64
+
 df1 = pd.read_csv('NAMtotal_s.csv')
 df1['ds'] = pd.to_datetime(df1["ds"]).dt.tz_localize(None)
 data = df1.rename(columns={'ds':'Date','y':'target'})
