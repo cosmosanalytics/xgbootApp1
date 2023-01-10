@@ -73,7 +73,7 @@ st.write(forecast)
 df1_cv = cross_validation(m1,
                       horizon='30 days', #
                       period='30 days', #
-                      initial='1980 days', #  
+                      initial='1260 days', #  
                       parallel="processes")#parallel='dask')
 df1_p = performance_metrics(df1_cv)
 #########################
