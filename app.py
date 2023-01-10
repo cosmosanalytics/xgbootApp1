@@ -28,9 +28,7 @@ data['month'] = data['Date'].dt.month
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
 if st.button('Export data (.csv)'):
     with st.spinner("Exporting.."):
-        export_forecast = data.copy()
-        st.write(export_forecast.head())
-        export_forecast= export_forecast.to_csv(decimal=',')
+        export_forecast= data.to_csv()
         b64 = base64.b64encode(export_forecast.encode()).decode()
         href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a> (click derecho > guardar como **data.csv**)'
         st.markdown(href, unsafe_allow_html=True)
