@@ -68,14 +68,14 @@ m1.add_regressor(name='GDPC1',
                   standardize='auto',
                   mode=mode)
 m1.fit(df1)
-# forecast = m1.predict()
-# st.write(forecast)
-# df1_cv = cross_validation(m1,
-#                       horizon='30 days', #
-#                       period='30 days', #
-#                       initial='1980 days', #  
-#                       parallel="processes")#parallel='dask')
-# df1_p = performance_metrics(df1_cv)
+forecast = m1.predict()
+st.write(forecast)
+df1_cv = cross_validation(m1,
+                      horizon='30 days', #
+                      period='30 days', #
+                      initial='1980 days', #  
+                      parallel="processes")#parallel='dask')
+df1_p = performance_metrics(df1_cv)
 #########################
 st.title("Hello, welcome to volume predictor!")
 st.write("""  
@@ -94,8 +94,8 @@ st.write("Model 2 works with XGB Regressor.")
 st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
-# st.write("Model 3 works with Prophet.")
-# st.write(df1_p)
-# plot_preds(df1["ds"],df1["y"], forecast["ds"], forecast["y"])
+st.write("Model 3 works with Prophet.")
+st.write(df1_p)
+plot_preds(df1["ds"],df1["y"], forecast["ds"], forecast["y"])
 
 
