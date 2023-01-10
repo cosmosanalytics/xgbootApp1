@@ -47,25 +47,22 @@ x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["ta
 x_test = test[["GDPC1", "Inflation", "month", "season"]]; y_test = test[["target"]]
 # fit scaler on training data
 # norm = MinMaxScaler().fit(x_train)
-# x_train_norm = pd.DataFrame(norm.transform(x_train))
-# x_test_norm = pd.DataFrame(norm.transform(x_test))
-x_train_norm = (x_train)
-x_test_norm = (x_test)
+# x_train = pd.DataFrame(norm.transform(x_train))
+# x_test = pd.DataFrame(norm.transform(x_test))
 #########################
 lr = LinearRegression()
-lr.fit(x_train_norm, y_train)
-pred_lr = lr.predict(x_test_norm)
-metric_lr = report_metric(pred_lr, y_test, "Linear Regression")
+lr.fit(x_train, y_train)
+pred_lr = lr.predict(x_train.append(x_test))
+metric_lr = report_metric(pred_lr, y_train.append(y_test), "Linear Regression")
 #########################
 xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
-xgb.fit(x_train_norm, y_train)
-pred_xgb = xgb.predict(x_test_norm)
+xgb.fit(x_train, y_train)
+pred_xgb = xgb.predict(x_test)
 metric_xgb = report_metric(pred_xgb, y_test, "XGB Regression")
 #########################
 lgb = LGBMRegressor(learning_rate=0.1, max_depth=2, min_child_samples=25, n_estimators=100, num_leaves=31)
-lgb.fit(x_train_norm, y_train)
-pred_lgb = lgb.predict(x_test_norm)
-
+lgb.fit(x_train, y_train)
+pred_lgb = lgb.predict(x_test)
 metric_lgb = report_metric(pred_lgb, y_test, "LGBM Regression")
 #########################
 st.title("Hello, welcome to volume predictor!")
