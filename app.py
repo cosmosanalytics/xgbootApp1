@@ -18,7 +18,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import GridSearchCV
 
-data = pd.read_csv('NAMtotal_s.csv').rename(columns={'index':'Date','y':'target'})
+data = pd.read_csv('NAMtotal_s.csv').rename(columns={'ds':'Date','y':'target'})
 st.write(data)
 data['Date'] = pd.to_datetime(data["Date"])
 st.write(data)
