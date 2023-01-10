@@ -109,7 +109,9 @@ m3pred = lgb_tune.predict(x_test_normm3)
 metric3 = report_metric(m3pred, y_testm3, "LGBM Regression")
 
 page = st.sidebar.selectbox("""
-Please select model""", ["Main Page", "Linear Regressor", "XGB Regressor", "LGBM Regressor", "Compare Models"])
+Please select model""", ["Main Page", "Linear Regressor"])
+# page = st.sidebar.selectbox("""
+# Please select model""", ["Main Page", "Linear Regressor", "XGB Regressor", "LGBM Regressor", "Compare Models"])
 
 if page == "Main Page":
     ### INFO
@@ -123,38 +125,38 @@ if page == "Main Page":
     """)
     st.write("Lets plot volume data!")
     st.line_chart(data[["Date", "target"]].set_index("Date"))
-elif page == "Linear Regressor":
+else: #if page == "Linear Regressor":
     st.title("Model 1: ")
     st.write("Model 1 works with linear regression as base model.")
     st.write("The columns it used are: col1, col2, col3, day_of_week, day_of_month, month, week_of_year, season")
     st.write(metric1)
     plot_preds(data["Date"],test["Date"], data["target"], m1pred)
-elif page == "XGB Regressor":
-    st.title("Model 2: ")
-    st.write("Model 2 works with XGB Regressor.")
-    st.write("The columns it used are: col1, col2, col3, day_of_week, day_of_month, month, week_of_year, season")
-    st.write(metric2)
-    plot_preds(data["Date"],test["Date"], data["target"], m2pred)
-elif page == "LGBM Regressor":
-    st.title("Model 3:")
-    st.write("Model 3 works with LGBM Regressor.")
-    st.write("The columns it used are: col1, col3, day_of_week, day_of_month")
-    st.write("We normalized and scaled data and we choose most important features.")
-    st.write()
-    st.write(metric3)
-    plot_preds(data["Date"],test["Date"], data["target"], m3pred)
-elif page == "Compare Models":
-    # Compare models.
-    st.title("Compare Models: ")
-    all_metrics = metric1.copy()
-    all_metrics["XGB Regression"] =  metric2["XGB Regression"].copy()
-    all_metrics["LGBM Regression"] = metric3["LGBM Regression"].copy()
-    st.write(all_metrics)
+# elif page == "XGB Regressor":
+#     st.title("Model 2: ")
+#     st.write("Model 2 works with XGB Regressor.")
+#     st.write("The columns it used are: col1, col2, col3, day_of_week, day_of_month, month, week_of_year, season")
+#     st.write(metric2)
+#     plot_preds(data["Date"],test["Date"], data["target"], m2pred)
+# elif page == "LGBM Regressor":
+#     st.title("Model 3:")
+#     st.write("Model 3 works with LGBM Regressor.")
+#     st.write("The columns it used are: col1, col3, day_of_week, day_of_month")
+#     st.write("We normalized and scaled data and we choose most important features.")
+#     st.write()
+#     st.write(metric3)
+#     plot_preds(data["Date"],test["Date"], data["target"], m3pred)
+# elif page == "Compare Models":
+#     # Compare models.
+#     st.title("Compare Models: ")
+#     all_metrics = metric1.copy()
+#     all_metrics["XGB Regression"] =  metric2["XGB Regression"].copy()
+#     all_metrics["LGBM Regression"] = metric3["LGBM Regression"].copy()
+#     st.write(all_metrics)
 
-    st.title("Best Model /XGB Regressor: ")
-    st.write("Lets plot best models predictions in detail.")
-    plot_preds(test["Date"],test["Date"], test["target"], m2pred)
-    st.write("Best Model Predictions vs Real")
-    best_pred = pd.DataFrame(test[["target"]].copy())
-    best_pred["pred"] = m2pred
-    st.write(best_pred)
+#     st.title("Best Model /XGB Regressor: ")
+#     st.write("Lets plot best models predictions in detail.")
+#     plot_preds(test["Date"],test["Date"], test["target"], m2pred)
+#     st.write("Best Model Predictions vs Real")
+#     best_pred = pd.DataFrame(test[["target"]].copy())
+#     best_pred["pred"] = m2pred
+#     st.write(best_pred)
