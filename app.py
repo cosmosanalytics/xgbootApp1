@@ -88,12 +88,14 @@ st.write("Model 1 works with linear regression as base model.")
 # st.write(metric_lr)
 plot_preds(data["Date"],data["Date"], data["target"], pred_lr)
 
-st.write("Model 2 works with XGB Regressor.")
+st.write("Model 2 works with Prophet.")
+# st.write(df1_p)
+plot_preds(df1["ds"], forecast["ds"], df1["y"], forecast["yhat"])
+
+st.write("Model 3 works with XGB Regressor.")
 # st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
-st.write("Model 3 works with Prophet.")
-# st.write(df1_p)
-plot_preds(df1["ds"], forecast["ds"], df1["y"], forecast["yhat"])
+
 
 
