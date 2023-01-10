@@ -76,7 +76,7 @@ st.write("""
 
 st.write("Model 1 works with linear regression as base model.")
 st.write(metric_lr)
-plot_preds(data["Date"],test["Date"], data["target"], pred_lr)
+plot_preds(data["Date"],data["Date"], data["target"], pred_lr)
 
 st.write("Model 2 works with XGB Regressor.")
 st.write(metric_xgb)
