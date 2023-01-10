@@ -69,6 +69,7 @@ m1.add_regressor(name='GDPC1',
                   mode=mode)
 m1.fit(df1)
 forecast = m1.predict()
+st.write(forecast)
 df1_cv = cross_validation(m1,
                       horizon='30 days', #
                       period='30 days', #
@@ -94,7 +95,7 @@ st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
 st.write("Model 3 works with Prophet.")
-st.write(metric_xgb)
+st.write(df1_p)
 plot_preds(df1["ds"],df1["y"], forecast["ds"], forecast["y"])
 
 
