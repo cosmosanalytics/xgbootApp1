@@ -25,6 +25,7 @@ df1['ds'] = pd.to_datetime(df1["ds"]).dt.tz_localize(None)
 data = df1.rename(columns={'ds':'Date','y':'target'})
 data.sort_values(by=['Date'], inplace=True)
 data['month'] = data['Date'].dt.month
+data['year'] = data['Date'].dt.year
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
 
 def report_metric(pred, test, model_name):
@@ -45,8 +46,8 @@ def plot_preds(data_date,test_date, target, pred):
 
 test_period = -10
 test = data[test_period:]; train = data[:test_period]
-x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
-x_test = test[["GDPC1", "Inflation",  "month", "season"]]; y_test = test[["target"]]
+x_train = train[["GDPC1", "Inflation", "month", "season", "year"]]; y_train = train[["target"]]
+x_test = test[["GDPC1", "Inflation",  "month", "season", "year"]]; y_test = test[["target"]]
 #########################
 lr = LinearRegression()
 lr.fit(x_train, y_train)
