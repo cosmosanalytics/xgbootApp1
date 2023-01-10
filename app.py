@@ -46,9 +46,11 @@ test = data[test_period:]; train = data[:test_period]
 x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
 x_test = test[["GDPC1", "Inflation", "month", "season"]]; y_test = test[["target"]]
 # fit scaler on training data
-norm = MinMaxScaler().fit(x_train)
-x_train_norm = pd.DataFrame(norm.transform(x_train))
-x_test_norm = pd.DataFrame(norm.transform(x_test))
+# norm = MinMaxScaler().fit(x_train)
+# x_train_norm = pd.DataFrame(norm.transform(x_train))
+# x_test_norm = pd.DataFrame(norm.transform(x_test))
+x_train_norm = (x_train)
+x_test_norm = (x_test)
 #########################
 lr = LinearRegression()
 lr.fit(x_train_norm, y_train)
