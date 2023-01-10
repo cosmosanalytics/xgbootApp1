@@ -26,12 +26,6 @@ data = df1.rename(columns={'ds':'Date','y':'target'})
 data.sort_values(by=['Date'], inplace=True)
 data['month'] = data['Date'].dt.month
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
-if st.button('Export data (.csv)'):
-    with st.spinner("Exporting.."):
-        export_forecast= data.to_csv()
-        b64 = base64.b64encode(export_forecast.encode()).decode()
-        href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a> (click derecho > guardar como **data.csv**)'
-        st.markdown(href, unsafe_allow_html=True)
 
 def report_metric(pred, test, model_name):
     mae = mean_absolute_error(pred, test)
@@ -103,3 +97,10 @@ plot_preds(df1["ds"], forecast["ds"], df1["y"], forecast["yhat"])
 st.write("Model 3 works with XGB Regressor.")
 # st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
+
+if st.button('Export data (.csv)'):
+    with st.spinner("Exporting.."):
+        export_forecast= data.to_csv()
+        b64 = base64.b64encode(export_forecast.encode()).decode()
+        href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a> (click derecho > guardar como **data.csv**)'
+        st.markdown(href, unsafe_allow_html=True)
