@@ -22,10 +22,10 @@ data = pd.read_csv('NAMtotal_s.csv').rename(columns={'ds':'Date','y':'target'})
 data['Date'] = pd.to_datetime(data["Date"])
 data.sort_values(by=['Date'], inplace=True)
 
-data['day_of_week'] = data['Date'].dt.dayofweek
-data['day_of_month'] = data['Date'].dt.day
+# data['day_of_week'] = data['Date'].dt.dayofweek
+# data['day_of_month'] = data['Date'].dt.day
 data['month'] = data['Date'].dt.month
-data['week_of_year'] = data['Date'].dt.week
+# data['week_of_year'] = data['Date'].dt.week
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
 
 def report_metric(pred, test, model_name):
@@ -46,8 +46,8 @@ def plot_preds(data_date,test_date, target, pred):
 
 test_period = -3
 test = data[test_period:]; train = data[:test_period]
-x_train = train[["GDPC1", "Inflation", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]; y_train = train[["target"]]
-x_test = test[["GDPC1", "Inflation", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]; y_test = test[["target"]]
+x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
+x_test = test[["GDPC1", "Inflation",  "month", "season"]]; y_test = test[["target"]]
 # fit scaler on training data
 # norm = MinMaxScaler().fit(x_train)
 # x_train = pd.DataFrame(norm.transform(x_train))
