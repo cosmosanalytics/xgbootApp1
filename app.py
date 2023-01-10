@@ -27,6 +27,7 @@ data['day_of_month'] = data['Date'].dt.day
 data['month'] = data['Date'].dt.month
 data['week_of_year'] = data['Date'].dt.week
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
+st.write(data)
 
 def report_metric(pred, test, model_name):
     mae = mean_absolute_error(pred, test)
