@@ -35,7 +35,7 @@ def report_metric(pred, test, model_name):
     return metric_df
 
 def plot_preds(data_date,test_date, target, pred):
-    fig = plt.figure(figsize=(20,10))
+    fig = plt.figure(figsize=(20,5))
     plt.plot(data_date, target, label = 'Real')
     plt.plot(test_date, pred, label = 'Pred')
     plt.legend()
