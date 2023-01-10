@@ -24,6 +24,7 @@ data = df1.rename(columns={'ds':'Date','y':'target'})
 data.sort_values(by=['Date'], inplace=True)
 data['month'] = data['Date'].dt.month
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
+st.write(data)
 
 def report_metric(pred, test, model_name):
     mae = mean_absolute_error(pred, test)
