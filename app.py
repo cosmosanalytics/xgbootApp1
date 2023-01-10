@@ -57,18 +57,16 @@ lr = LinearRegression()
 lr.fit(x_train, y_train)
 pred_lr = lr.predict(x_train.append(x_test))
 metric_lr = report_metric(pred_lr, y_train.append(y_test), "Linear Regression")
-st.write(x_train.append(x_test))
-st.write(pred_lr)
 #########################
 xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
 xgb.fit(x_train, y_train)
-pred_xgb = xgb.predict(x_test)
-metric_xgb = report_metric(pred_xgb, y_test, "XGB Regression")
+pred_xgb = xgb.predict(x_train.append(x_test))
+metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
 #########################
 lgb = LGBMRegressor(learning_rate=0.1, max_depth=2, min_child_samples=25, n_estimators=100, num_leaves=31)
 lgb.fit(x_train, y_train)
-pred_lgb = lgb.predict(x_test)
-metric_lgb = report_metric(pred_lgb, y_test, "LGBM Regression")
+pred_lgb = lgb.predict(x_train.append(x_test))
+metric_lgb = report_metric(pred_lgb, y_train.append(y_test), "LGBM Regression")
 #########################
 st.title("Hello, welcome to volume predictor!")
 st.write("""  
