@@ -49,12 +49,12 @@ x_test = test[["GDPC1", "Inflation",  "month", "season"]]; y_test = test[["targe
 lr = LinearRegression()
 lr.fit(x_train, y_train)
 pred_lr = lr.predict(x_train.append(x_test))
-metric_lr = report_metric(pred_lr, y_train.append(y_test), "Linear Regression")
+# metric_lr = report_metric(pred_lr, y_train.append(y_test), "Linear Regression")
 #########################
 xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
 xgb.fit(x_train, y_train)
 pred_xgb = xgb.predict(x_train.append(x_test))
-metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
+# metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
 #########################
 mode = 'additive'
 m1 = Prophet(seasonality_mode=mode, daily_seasonality=False, weekly_seasonality=False, yearly_seasonality=5);
@@ -69,10 +69,10 @@ m1.add_regressor(name='GDPC1',
                   mode=mode)
 m1.fit(df1)
 forecast = m1.predict()
-df1_cv = cross_validation(m1,
-                      horizon='30 days', #
-                      period='30 days', #
-                      initial='1260 days')
+# df1_cv = cross_validation(m1,
+#                       horizon='30 days', #
+#                       period='30 days', #
+#                       initial='1260 days')
 # df1_p = performance_metrics(df1_cv)
 #########################
 st.title("Hello, welcome to volume predictor!")
@@ -85,11 +85,11 @@ st.write("""
 """)
 
 st.write("Model 1 works with linear regression as base model.")
-st.write(metric_lr)
+# st.write(metric_lr)
 plot_preds(data["Date"],data["Date"], data["target"], pred_lr)
 
 st.write("Model 2 works with XGB Regressor.")
-st.write(metric_xgb)
+# st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
 st.write("Model 3 works with Prophet.")
