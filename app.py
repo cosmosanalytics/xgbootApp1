@@ -83,9 +83,9 @@ plot_preds(data["Date"],data["Date"], data["target"], pred_lr)
 
 st.write("Model 2 works with XGB Regressor.")
 st.write(metric_xgb)
-plot_preds(data["Date"],test["Date"], data["target"], pred_xgb)
+plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
 st.write("Model 3 works with LighGBM Regressor.")
 st.write(metric_lgb)
-plot_preds(data["Date"],test["Date"], data["target"], pred_lgb)
+plot_preds(data["Date"],data["Date"], data["target"], pred_lgb)
 
