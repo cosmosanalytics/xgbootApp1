@@ -6,6 +6,9 @@ import streamlit as st
 
 from sklearn import preprocessing
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import MinMaxScaler
+import lightgbm as lgb
+from lightgbm import LGBMRegressor
 from xgboost import XGBRegressor
 from xgboost import plot_importance
 import matplotlib.pyplot as plt
