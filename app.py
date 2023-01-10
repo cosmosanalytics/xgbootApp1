@@ -27,8 +27,6 @@ data['day_of_month'] = data['Date'].dt.day
 data['month'] = data['Date'].dt.month
 data['week_of_year'] = data['Date'].dt.week
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
-st.write(data)
-
 
 def report_metric(pred, test, model_name):
     mae = mean_absolute_error(pred, test)
@@ -59,6 +57,8 @@ lr = LinearRegression()
 lr.fit(x_train, y_train)
 pred_lr = lr.predict(x_train.append(x_test))
 metric_lr = report_metric(pred_lr, y_train.append(y_test), "Linear Regression")
+st.write(x_train.append(x_test))
+st.write(pred_lr)
 #########################
 xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
 xgb.fit(x_train, y_train)
