@@ -95,6 +95,6 @@ plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
 st.write("Model 3 works with Prophet.")
 # st.write(df1_p)
-plot_preds(df1["ds"],df1["y"], forecast["ds"], forecast["yhat"])
+plot_preds(df1["ds"], forecast["ds"], df1["y"], forecast["yhat"])
 
 
