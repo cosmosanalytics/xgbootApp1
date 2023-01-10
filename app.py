@@ -45,31 +45,30 @@ test_period = -40
 test = data[test_period:]; train = data[:test_period]
 x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
 x_test = test[["GDPC1", "Inflation", "month", "season"]]; y_test = test[["target"]]
+# fit scaler on training data
+norm = MinMaxScaler().fit(x_train)
+x_train_normm = pd.DataFrame(norm.transform(x_train))
+x_test_normm = pd.DataFrame(norm.transform(x_test))
 #########################
 lr = LinearRegression()
-lr.fit(x_train, y_train)
-pred_lr = lr.predict(x_test)
+lr.fit(x_train_norm, y_train)
+pred_lr = lr.predict(x_test_norm)
 metric_lr = report_metric(pred_lr, y_test, "Linear Regression")
 #########################
 xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
-xgb.fit(x_train, y_train)
-pred_xgb = xgb.predict(x_test)
+xgb.fit(x_train_norm, y_train)
+pred_xgb = xgb.predict(x_test_norm)
 metric_xgb = report_metric(pred_xgb, y_test, "XGB Regression")
 #########################
-page = st.sidebar.selectbox("""
-Please select model""", ["Main Page", "Linear Regressor", "XGB Regressor"])
 
-if page == "Main Page":
-    st.title("Hello, welcome to volume predictor!")
-    st.write("""  
-    - Date: date format time feature
-    - Real GDP
-    - Nominal GDP
-    - Inflation: = Nominal GDP/Real GDP - 1
-    - Volume: KG
-    """)
-    st.write("Lets plot volume data!")
-    st.line_chart(data[["Date", "target"]].set_index("Date"))
+st.title("Hello, welcome to volume predictor!")
+st.write("""  
+- Date: date format time feature
+- Real GDP
+- Nominal GDP
+- Inflation: = Nominal GDP/Real GDP - 1
+- Volume: KG
+""")
 elif page == "Linear Regressor":
     st.title("Model 1: ")
     st.write("Model 1 works with linear regression as base model.")
