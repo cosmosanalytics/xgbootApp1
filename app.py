@@ -73,11 +73,11 @@ m1pred = lr.predict(x_testm1)
 metric1 = report_metric(m1pred, y_testm1, "Linear Regression")
 
 ### Prepare for model 2
-x_trainm2 = train[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_trainm2 = train[["month", "season"]]
 # x_trainm2 = train[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_trainm2 = train[["target"]]
 
-x_testm2 = test[["day_of_week", "day_of_month", "month", "week_of_year", "season"]]
+x_testm2 = test[["month", "season"]]
 # x_testm2 = test[["col1", "col2", "col3", "day_of_week", "day_of_month", "month", "week_of_year", "season"]]
 y_testm2 = test[["target"]]
 
@@ -87,11 +87,11 @@ m2pred = xgb.predict(x_testm2)
 metric2 = report_metric(m2pred, y_testm2, "XGB Regression")
 
 ### Prepare for model 3 
-x_trainm3 = train[["day_of_week", "day_of_month"]]
+x_trainm3 = train[["month", "season"]]
 # x_trainm3 = train[["col1", "col3", "day_of_week", "day_of_month"]]
 y_trainm3 = train[["target"]]
 
-x_testm3 = test[["day_of_week", "day_of_month"]]
+x_testm3 = test[["month", "season"]]
 # x_testm3 = test[["col1", "col3", "day_of_week", "day_of_month"]]
 y_testm3 = test[["target"]]
 
