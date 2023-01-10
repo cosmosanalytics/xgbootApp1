@@ -26,7 +26,7 @@ data['month'] = data['Date'].dt.month
 data['season'] = (data['Date'].dt.month % 12 + 3) // 3
 if st.button('Export data (.csv)'):
     with st.spinner("Exporting.."):
-        export_forecast = Data.copy()
+        export_forecast = data.copy()
         st.write(export_forecast.head())
         export_forecast= export_forecast.to_csv(decimal=',')
         b64 = base64.b64encode(export_forecast.encode()).decode()
@@ -103,7 +103,3 @@ plot_preds(df1["ds"], forecast["ds"], df1["y"], forecast["yhat"])
 st.write("Model 3 works with XGB Regressor.")
 # st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
-
-
-
-
