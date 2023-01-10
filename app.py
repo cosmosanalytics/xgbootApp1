@@ -60,11 +60,7 @@ xgb.fit(x_train_norm, y_train)
 pred_xgb = xgb.predict(x_test_norm)
 metric_xgb = report_metric(pred_xgb, y_test, "XGB Regression")
 #########################
-lgb = LGBMRegressor(learning_rate=0.1,
-                                max_depth=2,
-                                min_child_samples=25,
-                                n_estimators=100,
-                                num_leaves=31)
+lgb = LGBMRegressor(learning_rate=0.1, max_depth=2, min_child_samples=25, n_estimators=100, num_leaves=31)
 lgb.fit(x_train_norm, y_train)
 pred_lgb = lgb.predict(x_test_norm)
 
@@ -88,6 +84,6 @@ st.write(metric_xgb)
 plot_preds(data["Date"],test["Date"], data["target"], pred_xgb)
 
 st.write("Model 3 works with XGB Regressor.")
-st.write(metric_xlgb)
+st.write(metric_lgb)
 plot_preds(data["Date"],test["Date"], data["target"], pred_lgb)
 
