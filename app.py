@@ -56,26 +56,26 @@ xgb.fit(x_train, y_train)
 pred_xgb = xgb.predict(x_train.append(x_test))
 metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
 #########################
-mode = 'additive'
-m1 = Prophet(seasonality_mode=mode, daily_seasonality=False, weekly_seasonality=False, yearly_seasonality=5);
-m1 = m1.add_seasonality(name='quarterly', period=365.24/4, fourier_order=5)
-m1.add_regressor(name='Inflation',
-                  prior_scale=10,
-                  standardize='auto',
-                  mode=mode)
-m1.add_regressor(name='GDPC1',
-                  prior_scale=10,
-                  standardize='auto',
-                  mode=mode)
-m1.fit(df1)
-forecast = m1.predict()
-st.write(forecast)
-df1_cv = cross_validation(m1,
-                      horizon='30 days', #
-                      period='30 days', #
-                      initial='1980 days', #  
-                      parallel="processes")#parallel='dask')
-df1_p = performance_metrics(df1_cv)
+# mode = 'additive'
+# m1 = Prophet(seasonality_mode=mode, daily_seasonality=False, weekly_seasonality=False, yearly_seasonality=5);
+# m1 = m1.add_seasonality(name='quarterly', period=365.24/4, fourier_order=5)
+# m1.add_regressor(name='Inflation',
+#                   prior_scale=10,
+#                   standardize='auto',
+#                   mode=mode)
+# m1.add_regressor(name='GDPC1',
+#                   prior_scale=10,
+#                   standardize='auto',
+#                   mode=mode)
+# m1.fit(df1)
+# forecast = m1.predict()
+# st.write(forecast)
+# df1_cv = cross_validation(m1,
+#                       horizon='30 days', #
+#                       period='30 days', #
+#                       initial='1980 days', #  
+#                       parallel="processes")#parallel='dask')
+# df1_p = performance_metrics(df1_cv)
 #########################
 st.title("Hello, welcome to volume predictor!")
 st.write("""  
@@ -94,8 +94,8 @@ st.write("Model 2 works with XGB Regressor.")
 st.write(metric_xgb)
 plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
 
-st.write("Model 3 works with Prophet.")
-st.write(df1_p)
-plot_preds(df1["ds"],df1["y"], forecast["ds"], forecast["y"])
+# st.write("Model 3 works with Prophet.")
+# st.write(df1_p)
+# plot_preds(df1["ds"],df1["y"], forecast["ds"], forecast["y"])
 
 
