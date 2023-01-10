@@ -96,15 +96,6 @@ forecast = m1.predict()
 # st.write(df1_p)
 plot_preds(df1["ds"], forecast["ds"], df1["y"], forecast["yhat"])
 
-st.write("Model 3 works with XGB Regressor.")
-#########################
-xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
-xgb.fit(x_train, y_train)
-pred_xgb = xgb.predict(x_train.append(x_test))
-# metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
-# st.write(metric_xgb)
-plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
-
 st.write("Model 4 works with light GBM Regressor.")
 #########################
 norm = MinMaxScaler().fit(x_train); x_train_norm = pd.DataFrame(norm.transform(x_train)); x_test_norm = pd.DataFrame(norm.transform(x_test))
@@ -117,4 +108,15 @@ lgb.fit(x_train_norm, y_train)
 pred_lgb = lgb.predict(x_train_norm.append(x_test_norm))
 # metric_lgb = report_metric(pred_lgb, y_test, "LGBM Regression")
 plot_preds(data["Date"],data["Date"], data["target"], pred_lgb)
+
+
+st.write("Model 3 works with XGB Regressor.")
+#########################
+xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
+xgb.fit(x_train, y_train)
+pred_xgb = xgb.predict(x_train.append(x_test))
+# metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
+# st.write(metric_xgb)
+plot_preds(data["Date"],data["Date"], data["target"], pred_xgb)
+
 
