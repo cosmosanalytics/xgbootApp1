@@ -56,18 +56,18 @@ xgb.fit(x_train, y_train)
 pred_xgb = xgb.predict(x_train.append(x_test))
 metric_xgb = report_metric(pred_xgb, y_train.append(y_test), "XGB Regression")
 #########################
-# mode = 'additive'
-# m1 = Prophet(seasonality_mode=mode, daily_seasonality=False, weekly_seasonality=False, yearly_seasonality=5);
-# m1 = m1.add_seasonality(name='quarterly', period=365.24/4, fourier_order=5)
-# m1.add_regressor(name='Inflation',
-#                   prior_scale=10,
-#                   standardize='auto',
-#                   mode=mode)
-# m1.add_regressor(name='GDPC1',
-#                   prior_scale=10,
-#                   standardize='auto',
-#                   mode=mode)
-# m1.fit(df1)
+mode = 'additive'
+m1 = Prophet(seasonality_mode=mode, daily_seasonality=False, weekly_seasonality=False, yearly_seasonality=5);
+m1 = m1.add_seasonality(name='quarterly', period=365.24/4, fourier_order=5)
+m1.add_regressor(name='Inflation',
+                  prior_scale=10,
+                  standardize='auto',
+                  mode=mode)
+m1.add_regressor(name='GDPC1',
+                  prior_scale=10,
+                  standardize='auto',
+                  mode=mode)
+m1.fit(df1)
 # forecast = m1.predict()
 # st.write(forecast)
 # df1_cv = cross_validation(m1,
