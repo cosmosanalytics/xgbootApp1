@@ -72,8 +72,7 @@ forecast = m1.predict()
 df1_cv = cross_validation(m1,
                       horizon='30 days', #
                       period='30 days', #
-                      initial='1260 days', #  
-                      parallel="processes")#parallel='dask')
+                      initial='1260 days')
 # df1_p = performance_metrics(df1_cv)
 #########################
 st.title("Hello, welcome to volume predictor!")
