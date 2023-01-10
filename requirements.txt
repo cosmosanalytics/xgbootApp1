@@ -6,5 +6,5 @@ streamlit
 
 scikit-learn 
 xgboost 
-lightgbm
+prophet
 
