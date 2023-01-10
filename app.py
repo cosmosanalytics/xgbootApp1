@@ -43,31 +43,42 @@ def plot_preds(data_date,test_date, target, pred):
 
 test_period = -40
 test = data[test_period:]; train = data[:test_period]
-x_trainm1 = train[["GDPC1", "Inflation", "month", "season"]]; y_trainm1 = train[["target"]]
-x_testm1 = test[["GDPC1", "Inflation", "month", "season"]]; y_testm1 = test[["target"]]
-
+x_train = train[["GDPC1", "Inflation", "month", "season"]]; y_train = train[["target"]]
+x_test = test[["GDPC1", "Inflation", "month", "season"]]; y_test = test[["target"]]
+#########################
 lr = LinearRegression()
-lr.fit(x_trainm1, y_trainm1)
-m1pred = lr.predict(x_testm1)
-metric1 = report_metric(m1pred, y_testm1, "Linear Regression")
-
+lr.fit(x_train, y_train)
+pred_lr = lr.predict(x_test)
+metric_lr = report_metric(pred_lr, y_test, "Linear Regression")
+#########################
+xgb = XGBRegressor(n_estimators=1000, learning_rate=0.05)
+xgb.fit(x_train, y_train)
+pred_xgb = xgb.predict(x_test)
+metric_xgb = report_metric(pred_xgb, y_test, "XGB Regression")
+#########################
 page = st.sidebar.selectbox("""
-Please select model""", ["Main Page", "Linear Regressor"])
+Please select model""", ["Main Page", "Linear Regressor", "XGB Regressor"])
 
 if page == "Main Page":
     st.title("Hello, welcome to volume predictor!")
     st.write("""  
     - Date: date format time feature
-    - col1: categorical feature 
-    - col2: second categorical feature
-    - col3: third categorical feature
-    - target: target variable to be predicted
+    - Real GDP
+    - Nominal GDP
+    - Inflation: = Nominal GDP/Real GDP - 1
+    - Volume: KG
     """)
     st.write("Lets plot volume data!")
     st.line_chart(data[["Date", "target"]].set_index("Date"))
-else: #if page == "Linear Regressor":
+elif page == "Linear Regressor":
     st.title("Model 1: ")
     st.write("Model 1 works with linear regression as base model.")
-    st.write("The columns it used are: col1, col2, col3, day_of_week, day_of_month, month, week_of_year, season")
-    st.write(metric1)
-    plot_preds(data["Date"],test["Date"], data["target"], m1pred)
+    st.write("The columns it used are: Real GDP, Inflation, month, season")
+    st.write(metric_lr)
+    plot_preds(data["Date"],test["Date"], data["target"], pred_lr)
+else: #if page == "Linear Regressor":
+    st.title("Model 2: ")
+    st.write("Model 1 works with XGB Regressor.")
+    st.write("The columns it used are: Real GDP, Inflation, month, season")
+    st.write(metric_xgb)
+    plot_preds(data["Date"],test["Date"], data["target"], pred_xgb)
